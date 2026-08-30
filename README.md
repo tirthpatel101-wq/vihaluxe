@@ -237,8 +237,7 @@ spring.mail.password=${MAIL_PASSWORD}
 ## 👨‍💻 Developer
 
 **Tirth Patel**
-
-GitHub: Add your GitHub profile link here
+GitHub: tirthpatel101-wq
 
 ---
 
