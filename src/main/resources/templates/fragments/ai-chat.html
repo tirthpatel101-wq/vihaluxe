@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="aiChat">
+
+    <!-- Floating Button -->
+    <button id="openChat"
+            class="btn btn-warning shadow"
+            style="
+            position:fixed;
+            bottom:25px;
+            right:25px;
+            z-index:9999;
+            border-radius:50px;
+            padding:14px 25px;">
+
+        🤖 Ask Viha
+
+    </button>
+
+    <!-- Chat Popup -->
+    <div id="chatPopup"
+         class="card shadow"
+         style="
+         display:none;
+         position:fixed;
+         bottom:95px;
+         right:25px;
+         width:380px;
+         z-index:9999;">
+
+        <div class="card-header bg-dark text-white">
+
+            Viha Luxe Assistant
+
+            <button id="closeChat"
+                    class="btn-close btn-close-white float-end">
+            </button>
+
+        </div>
+
+        <div class="card-body">
+
+            <textarea id="prompt"
+                      class="form-control"
+                      rows="3"
+                      placeholder="Ask anything..."></textarea>
+
+            <button id="sendBtn"
+                    class="btn btn-warning mt-3 w-100">
+
+                Ask AI
+
+            </button>
+
+            <hr>
+
+            <div id="chatResult"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>Manage Orders</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-dark">
+
+  <div class="container">
+
+        <span class="navbar-brand">
+
+            📋 Order Management
+
+        </span>
+
+    <a th:href="@{/admin}"
+       class="btn btn-warning">
+
+      Dashboard
+
+    </a>
+
+  </div>
+
+</nav>
+
+<div class="container mt-5">
+
+  <h2 class="mb-4">
+
+    Customer Orders
+
+  </h2>
+
+  <table class="table table-bordered table-hover shadow">
+
+    <thead class="table-dark">
+
+    <tr>
+
+      <th>ID</th>
+
+      <th>Customer</th>
+
+      <th>Email</th>
+
+      <th>Date</th>
+
+      <th>Total</th>
+
+      <th>Status</th>
+
+      <th>Address</th>
+
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+    <tr th:each="order : ${orders}">
+
+      <td th:text="${order.id}"></td>
+
+      <td th:text="${order.user.fullName}"></td>
+
+      <td th:text="${order.user.email}"></td>
+
+      <td th:text="${order.orderDate}"></td>
+
+      <td>
+
+        ₹ <span th:text="${order.totalAmount}"></span>
+
+      </td>
+
+      <td>
+
+        <form th:action="@{/admin/orders/update/{id}(id=${order.id})}"
+              method="post">
+
+          <select name="status"
+                  class="form-select mb-2">
+
+            <option value="Processing"
+                    th:selected="${order.status == 'Processing'}">
+              Processing
+            </option>
+
+            <option value="Packed"
+                    th:selected="${order.status == 'Packed'}">
+              Packed
+            </option>
+
+            <option value="Shipped"
+                    th:selected="${order.status == 'Shipped'}">
+              Shipped
+            </option>
+
+            <option value="Delivered"
+                    th:selected="${order.status == 'Delivered'}">
+              Delivered
+            </option>
+
+            <option value="Cancelled"
+                    th:selected="${order.status == 'Cancelled'}">
+              Cancelled
+            </option>
+
+          </select>
+
+          <button class="btn btn-primary btn-sm w-100">
+
+            Update
+
+          </button>
+
+        </form>
+
+      </td>
+
+      <td th:text="${order.shippingAddress}"></td>
+
+    </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+<footer class="mt-5 py-4 text-center">
+
+  <h5>🕯️ Viha Luxe</h5>
+
+  <p>
+    Luxury Scented Candles Crafted with Elegance
+  </p>
+
+  <small>
+    © 2026 Viha Luxe. All Rights Reserved.
+  </small>
+
+</footer>
+
+</body>
+
+</html>

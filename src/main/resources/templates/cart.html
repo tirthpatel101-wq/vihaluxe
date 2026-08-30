@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Shopping Cart | Viha Luxe</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="container py-5">
+
+    <h1 class="section-title text-center mb-5">
+        🛒 Shopping Cart
+    </h1>
+
+    <!-- Empty Cart -->
+
+    <div th:if="${#lists.isEmpty(cart.items)}">
+
+        <div class="empty-order">
+
+            <h2>Your Cart is Empty</h2>
+
+            <p>Add premium candles to experience luxury.</p>
+
+            <a th:href="@{/products}" class="btn btn-warning">
+                Continue Shopping
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Cart Items -->
+
+    <div th:unless="${#lists.isEmpty(cart.items)}">
+
+        <div class="cart-card mb-4"
+             th:each="item : ${cart.items}">
+
+            <div class="row align-items-center">
+
+                <!-- IMAGE -->
+
+                <div class="col-lg-3 text-center">
+
+                    <!-- Normal Product Image -->
+                    <img th:if="${item.product != null}"
+                         th:src="@{/images/{img}(img=${item.product.imageUrl})}"
+                         class="cart-img">
+
+                    <!-- Custom Candle Image -->
+                    <img th:if="${item.customCandle != null}"
+                         th:src="${item.customCandle.imagePath}"
+                         class="cart-img">
+
+                </div>
+
+                <!-- DETAILS -->
+
+                <div class="col-lg-6">
+
+                    <!-- Normal Product -->
+
+                    <div th:if="${item.product != null}">
+
+                        <h2 class="cart-title"
+                            th:text="${item.product.name}"></h2>
+
+                        <p class="cart-desc"
+                           th:text="${item.product.description}"></p>
+
+                        <div class="cart-price">
+                            ₹ <span th:text="${item.product.price}"></span>
+                        </div>
+
+                        <p class="mt-3">
+                            <strong style="color:#FFD700;">Subtotal :</strong>
+                            ₹
+                            <span th:text="${item.product.price * item.quantity}"></span>
+                        </p>
+
+                    </div>
+
+                    <!-- Custom Candle -->
+
+                    <div th:if="${item.customCandle != null}">
+
+                        <h2 class="cart-title">
+                            🕯️ Custom Luxury Candle
+                        </h2>
+
+                        <p class="cart-desc">
+
+                            <strong>Size:</strong>
+                            <span th:text="${item.customCandle.size}"></span>
+
+                            <br>
+
+                            <strong>Jar:</strong>
+                            <span th:text="${item.customCandle.jar}"></span>
+
+                            <br>
+
+                            <strong>Wax:</strong>
+                            <span th:text="${item.customCandle.wax}"></span>
+
+                            <br>
+
+                            <strong>Fragrance:</strong>
+                            <span th:text="${item.customCandle.fragrance}"></span>
+
+                            <br>
+
+                            <strong>Color:</strong>
+                            <span th:text="${item.customCandle.color}"></span>
+
+                            <br>
+
+                            <strong>Wick:</strong>
+                            <span th:text="${item.customCandle.wick}"></span>
+
+                            <br>
+
+                            <strong>Gift Wrap:</strong>
+                            <span th:text="${item.customCandle.giftWrap ? 'Yes' : 'No'}"></span>
+
+                            <br>
+
+                            <strong>Message:</strong>
+                            <span th:text="${item.customCandle.personalizedMessage}"></span>
+
+                        </p>
+
+                        <div class="cart-price">
+                            ₹ <span th:text="${item.customCandle.price}"></span>
+                        </div>
+
+                        <p class="mt-3">
+                            <strong style="color:#FFD700;">Subtotal :</strong>
+                            ₹
+                            <span th:text="${item.customCandle.price * item.quantity}"></span>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- QUANTITY -->
+
+                <div class="col-lg-3 text-center">
+
+                    <div class="quantity-box mb-4">
+
+                        <form th:action="@{/cart/decrease/{id}(id=${item.id})}"
+                              method="post">
+                            <button class="quantity-btn">-</button>
+                        </form>
+
+                        <div class="quantity-number"
+                             th:text="${item.quantity}">
+                        </div>
+
+                        <form th:action="@{/cart/increase/{id}(id=${item.id})}"
+                              method="post">
+                            <button class="quantity-btn">+</button>
+                        </form>
+
+                    </div>
+
+                    <form th:action="@{/cart/remove/{id}(id=${item.id})}"
+                          method="post">
+
+                        <button class="btn btn-danger remove-btn">
+
+                            Remove
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Summary -->
+
+        <div class="cart-summary">
+
+            <div class="row align-items-center">
+
+                <div class="col-md-6">
+
+                    <h2>Total</h2>
+
+                </div>
+
+                <div class="col-md-6 text-md-end">
+
+                    <div class="cart-total">
+
+                        ₹
+
+                        <span th:text="${cart.totalPrice}"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="text-end">
+
+                <a th:href="@{/products}"
+                   class="btn btn-secondary continue-btn">
+
+                    Continue Shopping
+
+                </a>
+
+                <a th:href="@{/checkout}"
+                   class="btn btn-warning btn-lg checkout-btn">
+
+                    Proceed to Checkout →
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer class="mt-5 py-4 text-center">
+
+    <h5>🕯️ Viha Luxe</h5>
+
+    <p>
+        Luxury Scented Candles Crafted with Elegance
+    </p>
+
+    <small>
+        © 2026 Viha Luxe. All Rights Reserved.
+    </small>
+
+</footer>
+
+</body>
+
+</html>

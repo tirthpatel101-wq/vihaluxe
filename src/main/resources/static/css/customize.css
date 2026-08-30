@@ -1,0 +1,314 @@
+/* ==========================================
+   CUSTOMIZE CANDLE PAGE
+========================================== */
+
+.preview-card,
+.checkout-card{
+
+    background:rgba(25,25,25,.95);
+
+    border:1px solid rgba(212,175,55,.25);
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:
+            0 20px 50px rgba(0,0,0,.45),
+            0 0 30px rgba(212,175,55,.08);
+
+    backdrop-filter:blur(18px);
+
+}
+
+.preview-card{
+
+    position:sticky;
+
+    top:110px;
+
+}
+
+.preview-card img{
+
+    transition:.5s;
+
+    border-radius:25px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+
+}
+
+.preview-card img:hover{
+
+    transform:scale(1.05);
+
+}
+
+.preview-card h3{
+
+    color:#FFD700;
+
+    font-weight:700;
+
+}
+
+.preview-card p{
+
+    color:#d8d8d8;
+
+}
+
+.checkout-card h3{
+
+    color:#FFD700;
+
+    margin-bottom:25px;
+
+}
+
+.checkout-card label{
+
+    color:white;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+.checkout-card select{
+
+    background:#242424;
+
+    color:white;
+
+    border:1px solid #555;
+
+    border-radius:12px;
+
+    padding:12px;
+
+}
+
+.checkout-card textarea{
+
+    background:#242424;
+
+    color:white;
+
+    border:1px solid #555;
+
+}
+
+.checkout-card input[type=file]{
+
+    background:#242424;
+
+    color:white;
+
+}
+
+.checkout-card input[type=color]{
+
+    width:90px;
+
+    height:55px;
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+.checkout-card hr{
+
+    border-color:#555;
+
+}
+
+.checkout-card h3 span{
+
+    color:#FFD700;
+
+}
+
+.form-check-label{
+
+    color:white;
+
+}
+
+.btn-dark{
+
+    border-radius:50px;
+
+}
+
+.btn-warning{
+
+    border-radius:50px;
+
+}
+
+.form-select:focus,
+.form-control:focus{
+
+    border-color:#FFD700;
+
+    box-shadow:0 0 15px rgba(255,215,0,.35);
+
+}
+
+.preview-card{
+
+    animation:fadeIn .8s ease;
+
+}
+
+.checkout-card{
+
+    animation:slideIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes slideIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+#previewPrice{
+
+    font-size:42px;
+
+    color:#FFD700;
+
+    font-weight:700;
+
+}
+
+#previewMessage{
+
+    color:#fff;
+
+    font-style:italic;
+
+}
+
+@media(max-width:991px){
+
+    .preview-card{
+
+        position:relative;
+
+        top:0;
+
+        margin-bottom:30px;
+
+    }
+
+}
+
+/* ===============================
+   Luxury Candle Preview
+=============================== */
+
+.candle-preview{
+
+    position:relative;
+
+    display:inline-block;
+
+}
+
+#previewImage{
+
+    max-height:350px;
+
+    transition:.4s ease;
+
+}
+
+#candleOverlay{
+
+    position:absolute;
+
+    top:18%;
+
+    left:32%;
+
+    width:36%;
+
+    height:52%;
+
+    background:#d4af37;
+
+    opacity:.35;
+
+    border-radius:18px;
+
+    transition:.4s ease;
+
+    mix-blend-mode:multiply;
+
+}
+
+.preview-animate{
+
+    animation:previewPop .4s;
+}
+
+@keyframes previewPop{
+
+    0%{
+
+        transform:scale(.95);
+
+        opacity:.8;
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
